@@ -90,26 +90,10 @@
 
             \raggedright
 
-            \vspace*{-5mm}
-            \includegraphics[width = 0.6\textwidth]{figures/phduio-logo}
-            \vskip18mm
-
-            \resizebox
-            {
-                \ifdim \width > \textwidth
-                \textwidth
-                \else
-                \width
-                \fi
-            }{!}
-            {%
-                \LARGE
-                \theauthor
-            }
-
             \vskip1.5\onelineskip
 
             {
+                \null \hfill
                 \Huge
                 \bfseries
                 \boldmath
@@ -122,6 +106,7 @@
                 {}
                 {
                     \vskip2mm
+                    \null \hfill
                     \huge
                     \phduio@subtitle
                     \par
@@ -129,38 +114,60 @@
             }
 
             \vskip-\lastskip
+            \vskip42mm
+            \begin{center}
+                \includegraphics[width = 0.6\textwidth]{figures/logo-ehu}
+            \end{center}
+            \vskip18mm
+
+            \vskip-\lastskip
             \vskip16mm
 
-            \resizebox{\textwidth}{!}
-            {%
-                \bfseries
-                \phduio@thesis\
-                submitted for the degree of Philosophiae Doctor
-            }
+            % \resizebox{\textwidth}{!}
+            % {%
+            %     \bfseries
+            %     \phduio@thesis\
+            %     submitted for the degree of Philosophiae Doctor
+            % }
 
-            \AND
 
-            {
-                \Large
-                \phduio@dept\
-                \and
-                \phduio@faculty\
-                \AND
-                \phduio@affiliation\
-            }
+            % \AND
+
+            % {
+            %     \Large
+            %     \phduio@dept\
+            %     \and
+            %     \phduio@faculty\
+            % }
 
             \vfill
 
-            \begin{minipage}[c][26mm]{28mm}
-                \hspace*{1.3mm}
-                \includegraphics[width = 26mm]{figures/phduio-apollon}
-            \end{minipage}%
-            \begin{minipage}[c]{\textwidth - 28mm}
-                \hfill
-                \LARGE
-                \bfseries
-                \the\year
-            \end{minipage}
+            {\hfill\large%
+                \begin{tabular}{@{}r@{}}
+                    \small Doctoral dissertation by: \\
+                    \large \theauthor 				\\[5ex]
+                    \small Supervised by: \\
+                    \large {Dr. C\'{e}sar Caballero-Gaudes and Dr. Miguel \'{A}ngel Veganzones} \\[5ex]
+                    \large \MONTH \the \year \\
+                \end{tabular}%
+            }
+
+            % {%
+            %     \null \hfill
+            %     Doctoral dissertation by: \\
+            %     \null \hfill \bfseries \theauthor
+            % }
+
+            % {
+            %     \null \hfill
+            %     Supervised by: \\
+            %     \bfseries \supervisor{C\'{e}sar Caballero-Gaudes}
+            % }
+            
+            % {
+            %     \null \hfill
+            %     \MONTH \the \year
+            % }
 
             \vspace{2mm}
 
@@ -185,7 +192,7 @@
 %% Part
 \renewcommand*{\printparttitle}[1]{\raggedright\parttitlefont #1}
 \renewcommand*{\afterpartskip}{\par}
-\renewcommand*{\parttitlefont}{\HUGE\bfseries\boldmath\sffamily}
+\renewcommand*{\parttitlefont}{\HUGE\bfseries\boldmath\sffamily\color{phd-cover}}
 \renewcommand*{\partnamefont}{\raggedright\Huge\normalfont\sffamily}
 \renewcommand*{\partnumfont}{\Huge\normalfont\sffamily}
 
@@ -196,51 +203,47 @@
 \newlength{\afterauthorsskip}
 \newlength{\aftermetadataskip}
 
+\RequirePackage{fourier} % or what ever
+\RequirePackage[scaled=.92]{inter}%. Sans serif - Helvetica
+\RequirePackage{calc}
+\newsavebox{\ChpNumBox}
+\makeatletter
+\newcommand*{\thickhrulefill}{%
+\leavevmode\leaders\hrule height 1\p@ \hfill \kern \z@}
+\newcommand*\BuildChpNum[2]{%
+\begin{tabular}[t]{@{}c@{}}
+\makebox[0pt][c]{#1\strut} \\[.5ex]
+\colorbox{phd-cover}{%
+\rule[-10em]{0pt}{0pt}%
+\rule{1ex}{0pt}\color{black}#2\strut
+\rule{1ex}{0pt}}%
+\end{tabular}}
+
 \makechapterstyle{phduio}
 {
-    \renewcommand*{\chapnamefont}{\huge\sffamily}
-    \renewcommand*{\chapnumfont}{\huge\sffamily}
-    \renewcommand*{\chaptitlefont}
-    {\Huge\bfseries\boldmath\sffamily\raggedright}
-    \renewcommand*{\authorsfont}{\Large\bfseries\sffamily}
-    \renewcommand*{\metadatafont}{\normalfont\normalsize\sffamily}
-
-    \setlength{\beforechapskip}{-1.35\baselineskip}
-    \setlength{\midchapskip}{10pt}
-    \setlength{\afterchapskip}{20pt}
-    \setlength{\afterauthorsskip}{6pt}
-    \setlength{\aftermetadataskip}{15pt}
-
-    \renewcommand*{\afterchaptertitle}
-    {
-        \vskip\afterchapskip
-        \ifboolexpr
-        {
-            test{ \ifcsempty{phduio@authors} }
-            and
-            test{ \ifcsempty{phduio@metadata} }
-        }
-        {}
-        {
-        \begin{minipage}[t]{\textwidth}
-            \authorsfont
-            \phduio@authors
-            \vskip\afterauthorsskip
-            \metadatafont
-            \phduio@metadata
-            \gdef \phduio@authors{}
-            \gdef \phduio@metadata{}
-        \end{minipage}
-        \vskip\aftermetadataskip
-        }
-    }
-
-    \renewcommand*{\printchapternonum}
-    {
-        \vphantom{\chapnumfont Chapter}
-        \afterchapternum
-        \vskip\topskip
-    }
+    \renewcommand{\chapnamefont}{\large\scshape\sffamily}
+    \renewcommand{\chapnumfont}{\Huge\bfseries}
+    \renewcommand{\chaptitlefont}{\raggedright\Huge\bfseries\sffamily}
+    \setlength{\beforechapskip}{20pt}
+    \setlength{\midchapskip}{26pt}
+    \setlength{\afterchapskip}{40pt}
+    \renewcommand{\printchaptername}{}
+    \renewcommand{\chapternamenum}{}
+    \renewcommand{\printchapternum}{%
+    \sbox{\ChpNumBox}{%
+    \BuildChpNum{\chapnamefont\@chapapp}%
+    {\chapnumfont\thechapter}}}
+    \renewcommand{\printchapternonum}{%
+    \sbox{\ChpNumBox}{%
+    \BuildChpNum{\chapnamefont\vphantom{\@chapapp}}%
+    {\chapnumfont\hphantom{\thechapter}}}}
+    \renewcommand{\afterchapternum}{}
+    \renewcommand{\printchaptertitle}[1]{%
+    \usebox{\ChpNumBox}\hfill
+    \parbox[t]{\hsize-\wd\ChpNumBox-1em}{%
+    \vspace{\midchapskip}%
+    \thickhrulefill\par
+    \chaptitlefont ##1\par}}%
 }
 
 \chapterstyle{phduio}
@@ -248,7 +251,7 @@
 
 %% Lower level sections
 \setsecnumdepth{subsubsection}
-\setsecheadstyle{\Large\bfseries\boldmath\sffamily\raggedright}
+\setsecheadstyle{\Large\bfseries\boldmath\sffamily\raggedright }
 \setsubsecheadstyle{\large\bfseries\boldmath\sffamily\raggedright}
 \setsubsubsecheadstyle{\normalsize\bfseries\boldmath\sffamily\raggedright}
 \setparaheadstyle{\normalsize\bfseries\boldmath\sffamily\raggedright}
@@ -515,18 +518,20 @@
 
 
 %% Offical colours
-\definecolor{uiored}  {cmyk}{0, 1, 1, 0}
+\usepackage{xcolor}
+\definecolor{uiored}  {HTML}{8A2300}
 \definecolor{uiogrey} {cmyk}{0, 0.05, 0.1, 0.29}
 \definecolor{uiowhite}{cmyk}{0, 0, 0, 0}
 \definecolor{uioblack}{cmyk}{0, 0, 0, 1}
-\definecolor{uiolink} {HTML}{0B5A9D}
+\definecolor{uiolink} {HTML}{018468}
+\definecolor{phd-cover}{HTML}{018468}
 
 
 %% Print official logo colon
-\newcommand{\uiocolon}
-{
-    \includegraphics[height = 1.5ex]{figures/phduio-colon}\,%
-}
+% \newcommand{\uiocolon}
+% {
+%     \includegraphics[height = 1.5ex]{figures/phduio-colon}\,%
+% }
 
 %% Subtitle
 \newcommand{\subtitle}[1]{ \def \phduio@subtitle{#1} }
@@ -557,38 +562,19 @@
 \newcommand{\cover}[1]{ \def \phduio@cover{#1} }
 \newcommand{\printinghouse}[1]{ \def \phduio@printinghouse{#1} }
 \cover{Hanne Baadsgaard Utigard}
-\printinghouse{Reprosentralen, University of Oslo}
-
+\printinghouse{Reprosentralen, Euskal Herriko Unibertsitatea}
 
 %% Print colophon
 \newcommand{\phduio@print@colophon}
 {
     \thispagestyle{empty}
     \vspace*{\stretch{3}}
-        \begin{flushleft}
-            \textbf{\sffamily\textcopyright\space\theauthor,\space\the\year}
-            \vskip2\baselineskip
-            \textit{Series of dissertations submitted to the}
-            \par
-            \textit{\phduio@faculty, University of Oslo}
-            \par
-            \ifcsempty{phduio@dissertationseries}
-            {}
-            {\textit{No.}\space\phduio@dissertationseries}
-            \vskip\baselineskip
-            \phduio@ISN
-            \vskip2\baselineskip
-            \small
-            All rights reserved.
-            No part of this publication may be
-            \par
-            reproduced or transmitted,
-            in any form or by any means,
-            without permission.
-            \vskip7\baselineskip
-            Cover: \phduio@cover.
-            \par
-            Print production: \phduio@printinghouse.
+    \begin{flushleft}
+        This work was supported by...
+        \small
+        \doclicenseThis
+        \vskip7\baselineskip
+        \textbf{\sffamily\textcopyright\space\theauthor,\space \MONTH \space \the\year}
     \end{flushleft}
     \vspace*{\stretch{1}}
     \null

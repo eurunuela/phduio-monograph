@@ -23,7 +23,8 @@
 
 %% Fonts and typography
 \RequirePackage{lmodern}           % Latin Modern
-\renewcommand{\sfdefault}{phv}     % Helvetica
+% \RequirePackage{inter}  % Inter
+% \renewcommand{\sfdefault}{phv}     % Helvetica
 \RequirePackage[scaled]{beramono}  % Bera Mono (Bitstream Vera Sans Mono)
 \RequirePackage[final]{microtype}  % Improved typography
 \pretolerance = 1000               % Relaxes parameters for line breaks
@@ -229,5 +230,10 @@
 \newcommand{\TikZ}{Ti\textit{k}Z\xspace}
 \newcommand{\matlab}{\textsc{Matlab}\xspace}
 
+%% License
+\RequirePackage{ccicons}
+\RequirePackage[type={CC},modifier={by-nc-sa},version={4.0}]{doclicense}
+
+%% Chapter titles
 
 \endinput

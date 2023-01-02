@@ -1,12 +1,14 @@
 % https://github.com/martinhelso/phduio-monograph
 
 % Add [final] to remove marginal notes:
-\documentclass[colophon, english]{phduio}
+\documentclass[colophon, english, screen]{phduio}
 
 \usepackage{phdstyle}   % Custom style
 \usepackage{kantlipsum} % Dummy text
 
-\author{Author}
+\author{Eneko Uruñuela}
+% Create supervisor command for use in \uiotitle
+\newcommand{\supervisor}[1]{#1}
 \title{Working Title}
 \subtitle{Optional Subtitle}
 \department{Department}
@@ -23,15 +25,15 @@
 
 \includeonly
 {
-    sections/dedication,
-    sections/abstract,
-    sections/preface,
-    sections/introduction,
-    sections/chapter2,
-    sections/chapter3,
-    sections/chapter4,
-    sections/appendixA,
-    sections/appendixB,
+    chapters/dedication,
+    chapters/abstract,
+    chapters/preface,
+    chapters/introduction,
+    chapters/chapter2,
+    chapters/chapter3,
+    chapters/chapter4,
+    chapters/appendixA,
+    chapters/appendixB,
 }
 
 \begin{document}
@@ -40,9 +42,9 @@
 
     \uiotitle
 
-    \include{sections/dedication}
-    \include{sections/abstract}
-    \include{sections/preface}
+    \include{chapters/dedication}
+    \include{chapters/abstract}
+    \include{chapters/preface}
 
     \cleartorecto
     \tableofcontents    % Or \tableofcontents*
@@ -53,19 +55,19 @@
 
     \mainmatter         % Folios in Arabic numerals, numbered chapters.
 
-    \include{sections/introduction}
+    \include{chapters/introduction}
 
     \part{The First Part}
 
-    \include{sections/chapter2}
-    \include{sections/chapter3}
-    \include{sections/chapter4}
+    \include{chapters/chapter2}
+    \include{chapters/chapter3}
+    \include{chapters/chapter4}
 
     \appendix           % "Chapter" is renamed "Appendix"
     \appendixpage       % Similar to \part*{Appendices}, but appears in TOC
 
-    \include{sections/appendixA}
-    \include{sections/appendixB}
+    \include{chapters/appendixA}
+    \include{chapters/appendixB}
 
     \backmatter         % Folios in Arabic numerals, unnumbered chapters.
 
